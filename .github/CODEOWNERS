@@ -1,0 +1,22 @@
+# CODEOWNERS — pull request review assignments
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything
+* @rosmall
+
+# Core framework files — require careful review
+playwright.config.ts        @rosmall
+global-setup.ts             @rosmall
+src/fixtures/site.fixture.ts @rosmall
+site.config.json            @rosmall
+
+# AI agent instructions — changes affect all automated workflows
+CLAUDE.md                   @rosmall
+AGENTS.md                   @rosmall
+.claude/                    @rosmall
+
+# CI/CD workflows — changes affect every PR
+.github/workflows/          @rosmall
+
+# Visual baselines — require human sign-off on visual changes
+__snapshots__/              @rosmall

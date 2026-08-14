@@ -1,0 +1,86 @@
+name: Bug Report
+description: Report a failing test, false positive, or flaky test
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please fill in as much detail as possible.
+
+  - type: dropdown
+    id: test-category
+    attributes:
+      label: Test Category
+      description: Which test suite is affected?
+      options:
+        - smoke
+        - navigation
+        - forms
+        - functional
+        - visual
+        - responsive
+        - multiple / unknown
+    validations:
+      required: true
+
+  - type: input
+    id: test-name
+    attributes:
+      label: Test Name
+      description: Full test name as shown in the Playwright report
+      placeholder: "Site Availability @smoke > site homepage loads successfully"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: failure-type
+    attributes:
+      label: Failure Type
+      options:
+        - Test fails consistently
+        - Test is flaky (sometimes passes, sometimes fails)
+        - False positive (test passes but the feature is broken)
+        - TypeScript compile error
+        - Selector no longer matches site HTML
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-message
+    attributes:
+      label: Error Message
+      description: Paste the full error output from Playwright
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How to reproduce the failure locally
+      placeholder: |
+        1. Run `npm run test:smoke`
+        2. Observe failure on test "..."
+    validations:
+      required: true
+
+  - type: input
+    id: browser-project
+    attributes:
+      label: Browser / Project
+      description: Which Playwright project failed?
+      placeholder: "chromium-desktop / mobile-chrome / tablet / all"
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Screenshots, site changes, anything else relevant
+    validations:
+      required: false

@@ -1,0 +1,81 @@
+name: Test Request
+description: Request new tests for a feature, page, or scenario not yet covered
+title: "[Test Request]: "
+labels: ["enhancement", "test-coverage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to request new Playwright tests for features or scenarios
+        not yet covered by the existing suite.
+
+  - type: input
+    id: feature-name
+    attributes:
+      label: Feature / Page Name
+      description: What feature or page needs test coverage?
+      placeholder: "Pricing page, FAQ accordion, video embed, etc."
+    validations:
+      required: true
+
+  - type: input
+    id: site-url
+    attributes:
+      label: Site URL or Path
+      description: URL or path to the page that needs coverage
+      placeholder: "https://crumbraise.com/pricing or /pricing"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: test-category
+    attributes:
+      label: Suggested Test Category
+      description: Which category does this test belong to?
+      options:
+        - smoke
+        - navigation
+        - forms
+        - functional
+        - visual
+        - responsive
+        - multiple
+    validations:
+      required: true
+
+  - type: textarea
+    id: scenarios
+    attributes:
+      label: Test Scenarios
+      description: Describe what should be tested. Be specific about what should pass.
+      placeholder: |
+        - Pricing page loads and shows at least 2 plan options
+        - Each plan has a visible CTA button
+        - Plan names are visible (not empty)
+        - No horizontal overflow on mobile
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Why This Coverage Matters
+      description: What business value does this test protect?
+      placeholder: "Pricing page is a key conversion page — broken CTAs directly affect signups."
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: constraints
+    attributes:
+      label: Constraints
+      description: Confirm which rules apply
+      options:
+        - label: This test must NOT submit any form
+          required: true
+        - label: This test must NOT create an account or log in
+          required: true
+        - label: I have checked that this scenario isn't already covered
+          required: true

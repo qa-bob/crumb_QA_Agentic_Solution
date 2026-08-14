@@ -49,6 +49,8 @@ export default defineConfig({
     trace: 'on-first-retry',
     actionTimeout: 15_000,
     navigationTimeout: 30_000,
+    // crumbraise.com may have an expired TLS cert; ignore so tests run against the actual site
+    ignoreHTTPSErrors: true,
   },
 
   // ── Visual regression snapshots ─────────────────────────────────
