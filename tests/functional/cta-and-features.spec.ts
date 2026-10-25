@@ -13,7 +13,7 @@ import { test, expect } from '@fixtures/site.fixture';
 test.describe('CTAs and Features @functional', () => {
   test.beforeEach(async ({ page, siteConfig }) => {
     await page.goto(siteConfig.url, { waitUntil: 'domcontentloaded' });
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('load');
   });
 
   // ── Primary CTA ───────────────────────────────────────────────────────────────
@@ -69,11 +69,8 @@ test.describe('CTAs and Features @functional', () => {
     );
 
     const count = await featureCards.count();
-    if (count === 0) {
-      console.warn('[functional] No feature card elements found — site may use a different layout pattern.');
-      // Soft pass — layout varies across B2B SaaS sites
-      return;
-    }
+    // Layout varies across B2B SaaS sites
+    test.skip(count === 0, 'No feature card elements found — site may use a different layout pattern');
 
     expect(count, 'Feature/benefit items should be present').toBeGreaterThan(0);
 
@@ -90,10 +87,7 @@ test.describe('CTAs and Features @functional', () => {
       '[class*="social-proof" i], [class*="quote" i]'
     ).first();
 
-    if (await socialProof.count() === 0) {
-      console.warn('[functional] No social proof section found — may be expected for early-stage site.');
-      return;
-    }
+    test.skip(await socialProof.count() === 0, 'No social proof section found — may be expected for early-stage site');
 
     await expect(socialProof, 'Social proof section should be visible').toBeVisible();
   });
@@ -160,8 +154,7 @@ test.describe('CTAs and Features @functional', () => {
         await expect(navContact, 'Contact nav link should be visible').toBeVisible();
         return;
       }
-      console.warn('[functional] No contact path found on homepage.');
-      return;
+      test.skip(true, 'No contact path found on homepage');
     }
 
     await expect(contactCTA, 'Contact/demo CTA should be visible').toBeVisible();

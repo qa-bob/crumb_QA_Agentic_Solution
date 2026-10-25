@@ -52,10 +52,7 @@ test.describe('Homepage Functional @functional', () => {
   test('CTA buttons are visible and have non-empty text @functional', async ({ homePage }) => {
     const ctaButtons = await homePage.getCTAButtons();
 
-    if (ctaButtons.length === 0) {
-      console.warn('[functional] No CTA buttons found on homepage — skipping text check.');
-      return;
-    }
+    test.skip(ctaButtons.length === 0, 'No CTA buttons found on homepage');
 
     for (const cta of ctaButtons.slice(0, 5)) {
       const isVisible = await cta.isVisible();
