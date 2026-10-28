@@ -85,16 +85,13 @@ test.describe('Navigation Routing @functional @navigation', () => {
       .filter({ hasNotText: /^$/ })
       .first();
 
-    if (await secondLink.count() === 0) {
-      console.warn('[functional] No nav links found to test back-button navigation.');
-      return;
-    }
+    test.skip(await secondLink.count() === 0, 'No nav links found to test back-button navigation');
 
     const href = await secondLink.getAttribute('href');
-    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
-      console.warn(`[functional] First nav link is not a page link (${href}) — skipping back-button test.`);
-      return;
-    }
+    test.skip(
+      !href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:'),
+      `First nav link is not a page link (${href})`
+    );
 
     // Navigate to second page
     await secondLink.click();
@@ -134,7 +131,7 @@ test.describe('Navigation Routing @functional @navigation', () => {
     });
 
     if (!response) {
-      console.warn('[functional] No response for non-existent URL — skipping 404 check.');
+      test.skip(true, 'No response for non-existent URL');
       return;
     }
 
@@ -165,10 +162,7 @@ test.describe('Navigation Routing @functional @navigation', () => {
       .filter({ hasNotText: /^$/ });
 
     const count = await anchorLinks.count();
-    if (count === 0) {
-      console.warn('[functional] No in-page anchor links found — skipping anchor test.');
-      return;
-    }
+    test.skip(count === 0, 'No in-page anchor links found');
 
     const firstAnchor = anchorLinks.first();
     const href = await firstAnchor.getAttribute('href');
